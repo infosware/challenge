@@ -23,8 +23,6 @@ namespace SuperPanel.App.Services
 
         public UsersData GetUsersBy(int pageSize, int pageNumber)
         {
-            pageSize = pageSize > 0 ? pageSize : AppSettings.DefaultPageSize;
-
             return new UsersData { 
                 Users = _userRepository.Query(pageSize, pageNumber),
                 TotalCount = _userRepository.Count()

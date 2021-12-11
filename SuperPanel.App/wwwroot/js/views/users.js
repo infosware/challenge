@@ -2,12 +2,13 @@
 import { getUsers } from '../services/userService.js';
 import { showLoadingOverlay, hideLoadingOverlay } from '../helpers.js';
 import { Pagination } from './pagination.js';
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '../constants.js';
 
 class Users {
     constructor() {
         this.initSelectors();
         this.initComponents();
-        this.loadUsers();
+        this.loadUsers(DEFAULT_PAGE_SIZE, DEFAULT_PAGE_NUMBER);
     }
 
     initSelectors() {

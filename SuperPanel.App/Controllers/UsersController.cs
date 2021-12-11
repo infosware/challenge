@@ -22,7 +22,7 @@ namespace SuperPanel.App.Controllers
         }
 
         [Route("/users/get")]
-        public IActionResult GetUsers(int pageSize, int pageNumber = 1)
+        public IActionResult GetUsers(int pageSize, int pageNumber)
         {
             var users = _userService.GetUsersBy(pageSize, pageNumber);
             return Json(users);

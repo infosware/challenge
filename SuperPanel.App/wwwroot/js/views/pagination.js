@@ -1,10 +1,8 @@
 ﻿import { PanelHogan } from '../panelHogan.js';
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '../constants.js';
 
 class Pagination {
     constructor(settings) {
-        this.DEFAULT_PAGE_SIZE = 10;
-        this.DEFAULT_PAGE_NUMBER = 1;
-
         this.settings = settings;
 
         this.initSelectors();
@@ -44,7 +42,7 @@ class Pagination {
         $(e.currentTarget).addClass('active');
 
         const pageSize = +$(e.target).text().trim();
-        this.settings.callback(pageSize, this.DEFAULT_PAGE_NUMBER, this.settings.ctx);
+        this.settings.callback(pageSize, DEFAULT_PAGE_NUMBER, this.settings.ctx);
     }
 
     onPaginationChange(e) {
@@ -105,7 +103,7 @@ class Pagination {
         this.onGoToPageChange(pageNumber + 1);
     }
 
-    refreshPages(totalItems, rowsPerPage = this.DEFAULT_PAGE_SIZE, currentPage = this.DEFAULT_PAGE_NUMBER) {
+    refreshPages(totalItems, rowsPerPage = DEFAULT_PAGE_SIZE, currentPage = DEFAULT_PAGE_NUMBER) {
 
         const pagesCount = Math.ceil(totalItems / rowsPerPage);
         const totalPages = [...Array(pagesCount || 0).keys()].map(i => i + 1); // 1 2 3 4 5
