@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using SuperPanel.App.Data;
 using SuperPanel.App.Infrastructure;
 using SuperPanel.App.Models;
+using SuperPanel.App.Services;
+using SuperPanel.App.Services.Abstract;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -34,6 +36,7 @@ namespace SuperPanel.App
 
             // Data
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
 

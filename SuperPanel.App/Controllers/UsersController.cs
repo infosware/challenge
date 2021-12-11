@@ -1,26 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SuperPanel.App.Data;
+using SuperPanel.App.Helpers;
+using SuperPanel.App.Services.Abstract;
 
 namespace SuperPanel.App.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ILogger<UsersController> _logger;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UsersController(ILogger<UsersController> logger, IUserRepository userRepository)
+        public UsersController(ILogger<UsersController> logger, IUserService userService)
         {
             _logger = logger;
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
-            var users = _userRepository.QueryAll();
-            return View(users);
+            return View();
         }
 
-
+        [Route("/users/get")]
+        public IActionResult GetUsers(int pageSize, int pageNumber = 1)
+        {
+            var users = _userService.GetUsersBy(pageSize, pageNumber);
+            return Json(users);
+        }
     }
 }

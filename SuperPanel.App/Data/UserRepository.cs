@@ -10,6 +10,10 @@ namespace SuperPanel.App.Data
     public interface IUserRepository
     {
         IEnumerable<User> QueryAll();
+        
+        IEnumerable<User> Query(int pageSize, int pageNumber);
+
+        int Count();
     }
 
     public class UserRepository : IUserRepository
@@ -29,5 +33,17 @@ namespace SuperPanel.App.Data
             return _users;
         }
 
+        public int Count()
+        {
+            return _users.Count;
+        }
+
+        public IEnumerable<User> Query(int pageSize, int pageNumber)
+        {
+            return _users
+                .OrderBy(u => u.Id)
+                .Skip(pageNumber * pageSize - pageSize)
+                .Take(pageSize);
+        }
     }
 }

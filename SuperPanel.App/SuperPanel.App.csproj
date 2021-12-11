@@ -6,13 +6,25 @@
 
   <ItemGroup>
     <Compile Remove="json\**" />
+    <Compile Remove="wwwroot\lib\date-fns\**" />
+    <Compile Remove="wwwroot\lib\moment\**" />
     <Content Remove="json\**" />
+    <Content Remove="wwwroot\lib\date-fns\**" />
+    <Content Remove="wwwroot\lib\moment\**" />
     <EmbeddedResource Remove="json\**" />
+    <EmbeddedResource Remove="wwwroot\lib\date-fns\**" />
+    <EmbeddedResource Remove="wwwroot\lib\moment\**" />
     <None Remove="json\**" />
+    <None Remove="wwwroot\lib\date-fns\**" />
+    <None Remove="wwwroot\lib\moment\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="33.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\dayjs\" />
   </ItemGroup>
 
 </Project>

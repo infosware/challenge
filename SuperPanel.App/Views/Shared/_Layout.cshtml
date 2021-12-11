@@ -41,7 +41,10 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/loadingoverlay/loadingoverlay.min.js"></script>
+    <script src="~/lib/hogan/hogan.min.js"></script>
+    <script src="~/lib/dayjs/dayjs.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true" type="module"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
