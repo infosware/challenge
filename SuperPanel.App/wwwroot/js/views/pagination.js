@@ -12,6 +12,7 @@ class Pagination {
 
     initSelectors() {
         this.selectors = {
+            paginationOptions: '.paginator-options',
             rowsPerPageBtn: '.paginator-rows',
             paginationWrapper: '.paginator-pages',
             paginationTemplate: 'pagination-hogan-template',
@@ -104,6 +105,9 @@ class Pagination {
     }
 
     refreshPages(totalItems, rowsPerPage = DEFAULT_PAGE_SIZE, currentPage = DEFAULT_PAGE_NUMBER) {
+        if (totalItems > 0) {
+            $(this.selectors.paginationOptions).removeClass('d-none');
+        }
 
         const pagesCount = Math.ceil(totalItems / rowsPerPage);
         const totalPages = [...Array(pagesCount || 0).keys()].map(i => i + 1); // 1 2 3 4 5

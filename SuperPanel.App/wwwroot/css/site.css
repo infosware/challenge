@@ -94,11 +94,11 @@ body {
     background: rgb(246, 246, 246);
 }
 
-.paginator-info {
+.paginator-options {
     display: flex;
 }
 
-.paginator-info span {
+.paginator-options span {
     line-height: 2;
     margin-left: 5px;
 }
