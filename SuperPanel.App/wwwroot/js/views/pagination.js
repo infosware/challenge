@@ -48,34 +48,31 @@ class Pagination {
     }
 
     onPaginationChange(e) {
-        const target = $(e.target).parent();
+        const target = $(e.target);
 
-        switch (target.get(0)) {
-            case $(this.selectors.goToFirstPageBtn).get(0):
-                this.onGoToPageChange(1);
-                break;
-            case $(this.selectors.goToLastPageBtn).get(0):
-                this.onGoToPageChange(this.numberOfPages);
-                break;
-            case $(this.selectors.goToPreviousPageBtn).get(0):
-                this.onGoToPrevPageChange();
-                break;
-            case $(this.selectors.goToNextPageBtn).get(0):
-                this.onGoToNextPageChange();
-                break;
-            case $(this.selectors.goToPageAtMiddleBtn).get(0):
-                this.onGoToPageAtMiddleChange(target);
-                break;
-            case $(this.selectors.goToPageAtStartBtn).get(0):
-                this.onGoToPageAtStartChange(target);
-                break;
-            case $(this.selectors.goToPageAtEndBtn).get(0):
-                this.onGoToPageAtEndChange(target);
-                break;
-            default:
-                if (target.get(0).className === $(this.selectors.goToPageBtn).get(0).className) {
-                    this.onGoToPageChange(+target.text().trim());
-                }
+        if (target.is($(this.selectors.goToFirstPageBtn))) {
+            this.onGoToPageChange(1);
+        }
+        else if (target.is($(this.selectors.goToLastPageBtn))) {
+            this.onGoToPageChange(this.numberOfPages);
+        }
+        else if (target.is($(this.selectors.goToPreviousPageBtn))) {
+            this.onGoToPrevPageChange();
+        }
+        else if (target.is($(this.selectors.goToNextPageBtn))) {
+            this.onGoToNextPageChange();
+        }
+        else if (target.is($(this.selectors.goToPageAtMiddleBtn))) {
+            this.onGoToPageAtMiddleChange(target);
+        }
+        else if (target.is($(this.selectors.goToPageAtStartBtn))) {
+            this.onGoToPageAtStartChange(target);
+        }
+        else if (target.is($(this.selectors.goToPageAtEndBtn))) {
+            this.onGoToPageAtEndChange(target);
+        }
+        else if (target.is($(this.selectors.goToPageBtn))) {
+            this.onGoToPageChange(+target.text().trim());
         }
     }
 
@@ -94,17 +91,17 @@ class Pagination {
     }
 
     onGoToPageAtMiddleChange(target) {
-        const pageNumber = +target.prev().text().trim();
+        const pageNumber = +target.parent().prev().text().trim();
         this.onGoToPageChange(pageNumber + 1);
     }
 
     onGoToPageAtStartChange(target) {
-        const pageNumber = +target.next().text().trim();
+        const pageNumber = +target.parent().next().text().trim();
         this.onGoToPageChange(pageNumber - 1);
     }
 
     onGoToPageAtEndChange(target) {
-        const pageNumber = +target.prev().text().trim();
+        const pageNumber = +target.parent().prev().text().trim();
         this.onGoToPageChange(pageNumber + 1);
     }
 
@@ -148,8 +145,6 @@ class Pagination {
             const $pages = this.hogan.renderTemplate(object);
             $(this.selectors.paginationWrapper).empty().append($pages);
         }
-
-        $(`${this.selectors.goToPageBtn}:contains('${currentPage}')`).addClass('active');
     }
 }
 

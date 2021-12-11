@@ -1,0 +1,24 @@
+﻿<script type="text/x-hogan-template" id="users-hogan-template">
+    {{#object}}
+        <table class="table entity-data-table users_table ">
+        <thead class="entity-data-thead">
+            <tr>
+                <th class="entity-th">#</th>
+                <th class="entity-th">Name</th>
+                <th class="entity-th">Email</th>
+                <th class="entity-th">Created at</th>
+            </tr>
+        </thead>
+        <tbody class="entity-data-tbody">
+        {{#users}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{firstName}} {{lastName}}</td>
+                <td>{{email}}</td>
+                <td>{{createdAt}}</td>
+            </tr>
+        {{/users}}
+        </tbody>
+        </table>
+    {{/object}}
+</script>

@@ -1,0 +1,18 @@
+﻿@using SuperPanel.App.Helpers;
+
+<div class="paginator">
+    <div class="paginator-info">
+        <ul class="paginator-list">
+            @foreach (var paginationOption in AppSettings.PaginationOptions)
+            {
+                <li class="paginator-rows @(AppSettings.DefaultPageSize.ToString() == paginationOption ? "active" : "")">
+                    <span class="link rows-per-page">@paginationOption</span>
+                </li>
+            }
+        </ul>
+        <span>rows per page</span>
+    </div>
+    <div class="paginator-pages">
+        <partial name="~/Views/partials/PaginationHogan.cshtml" />
+    </div>
+</div>
