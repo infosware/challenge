@@ -1,27 +1,13 @@
-﻿@model IEnumerable<User>
-
-@{
+﻿@{
     ViewData["Title"] = "User's list";
 }
 
 
-<table class="table">
+<div class="users_wrapper">
+    <partial name="~/Views/Users/UsersHogan.cshtml" />
+</div>
 
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created at</th>
-        </tr>
-    </thead>
-    @foreach (var u in Model)
-    {
-        <tr>
-            <td>@u.Id</td>
-            <td>@u.FirstName @u.LastName</td>
-            <td>@u.Email</td>
-            <td>@u.CreatedAt</td>
-        </tr>
-    }
-</table>
+<div class="paginator-wrapper">
+    <partial name="~/Views/partials/Pagination.cshtml" />
+</div>
+
