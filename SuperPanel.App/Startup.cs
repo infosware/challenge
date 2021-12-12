@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperPanel.App.Data;
+using SuperPanel.App.DistributedServices;
+using SuperPanel.App.DistributedServices.Abstract;
 using SuperPanel.App.Infrastructure;
 using SuperPanel.App.Models;
 using SuperPanel.App.Services;
@@ -37,6 +39,7 @@ namespace SuperPanel.App
             // Data
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExternalContacts, ExternalContactsApi>();
         }
 
 

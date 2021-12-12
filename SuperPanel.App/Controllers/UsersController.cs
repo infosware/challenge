@@ -27,5 +27,21 @@ namespace SuperPanel.App.Controllers
             var users = _userService.GetUsersBy(pageSize, pageNumber);
             return Json(users);
         }
+
+        //[HttpPut]
+        //[Route("/users/gdpr/{userId:int}")]
+        //public IActionResult RequestUserGDPR(int userId)
+        //{
+        //    var user = _userService.RequestGDPR(userId);
+        //    return Json(user);
+        //}
+
+        //[HttpPut]
+        //[Route("/users/gdpr/{userId:int}/delete")]
+        //public IActionResult RequestUserGDPRDelete(int userId)
+        //{
+        //    var user = _userService.RequestGDPRDelete(userId);
+        //    return Json(user);
+        //}
     }
 }

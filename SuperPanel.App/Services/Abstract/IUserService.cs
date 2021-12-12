@@ -11,5 +11,9 @@ namespace SuperPanel.App.Services.Abstract
         IEnumerable<User> GetAllUsers();
         
         UsersData GetUsersBy(int pageSize, int pageNumber);
+
+        User RequestGDPR(int userId);
+        
+        User RequestGDPRDelete(int userId);
     }
 }
