@@ -1,12 +1,12 @@
 ﻿
 const endpoints = {
-    getUsers: 'users/get?pageSize={rowsPerPage}&pageNumber={go-to-page}',
+    getUsers: 'users/get?pageSize={rowsPerPage}&pageNumber={goToPage}',
 };
 
 
 export function getUsers(pageSize, pageNumber) {
     return fetch(
-        endpoints.getUsers.replace('{rowsPerPage}', pageSize).replace('{go-to-page}', pageNumber),
+        endpoints.getUsers.replace('{rowsPerPage}', pageSize).replace('{goToPage}', pageNumber),
         {
             method: 'GET',
         }
