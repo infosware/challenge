@@ -8,12 +8,12 @@ namespace SuperPanel.App.DistributedServices.Abstract
 {
     public interface IExternalContacts
     {
-        User GetUserBy(int userId);
-        
-        User GetUserBy(string userEmail);
-        
-        User GDPR(int userId);
+        Task<User> GetUserBy(int userId);
 
-        User GDPRDelete(int userId);
+        Task<User> GetUserBy(string userEmail);
+
+        Task<User> GDPR(int userId);
+
+        Task<User> GDPRDelete(int userId);
     }
 }

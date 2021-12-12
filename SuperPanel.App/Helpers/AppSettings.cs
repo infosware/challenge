@@ -22,9 +22,13 @@ namespace SuperPanel.App.Helpers
         public static int DefaultPageSize = Configuration.GetValue<int>("Constants:DefaultPageSize");
         
         public static int ServiceRetryCount = Configuration.GetValue<int>("Constants:ServiceRetryCount");
+        
+        public static int ServiceRetryTimeoutMs = Configuration.GetValue<int>("Constants:ServiceRetryTimeoutMs");
 
         public static string[] PaginationOptions = Configuration.GetSection("Constants:PaginationOptions").Get<string[]>();
 
         public static string ExternalContactsApiUrl = Configuration.GetValue<string>("Constants:ExternalContactsApiUrl");
+        
+        public static string ExternalContactsHttpClient = Configuration.GetValue<string>("Constants:ExternalContactsHttpClient");
     }
 }

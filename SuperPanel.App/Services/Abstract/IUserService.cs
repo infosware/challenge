@@ -8,12 +8,16 @@ namespace SuperPanel.App.Services.Abstract
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers();
+        Task<IEnumerable<User>> GetAllUsers();
         
-        UsersData GetUsersBy(int pageSize, int pageNumber);
+        Task<UsersData>  GetUsersBy(int pageSize, int pageNumber);
 
-        User RequestGDPR(int userId);
+        Task<User> GetUserBy(int userId);
         
-        User RequestGDPRDelete(int userId);
+        Task<User> GetUserBy(string userEmail);
+
+        //User RequestGDPR(int userId);
+
+        //User RequestGDPRDelete(int userId);
     }
 }

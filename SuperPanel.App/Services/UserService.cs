@@ -5,6 +5,7 @@ using SuperPanel.App.Helpers;
 using SuperPanel.App.Models;
 using SuperPanel.App.Services.Abstract;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SuperPanel.App.Services
 {
@@ -19,27 +20,37 @@ namespace SuperPanel.App.Services
             _externalContactsProxy = externalContactsProxy;
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return _userRepository.QueryAll();
+            return await Task.FromResult(_userRepository.QueryAll());
         }
 
-        public UsersData GetUsersBy(int pageSize, int pageNumber)
+        public async Task<UsersData> GetUsersBy(int pageSize, int pageNumber)
         {
-            return new UsersData { 
+            return await Task.FromResult(new UsersData { 
                 Users = _userRepository.Query(pageSize, pageNumber),
                 TotalCount = _userRepository.Count()
-            };
+            });
         }
 
-        public User RequestGDPR(int userId)
+        public async Task<User> GetUserBy(int userId)
         {
-            return _externalContactsProxy.GDPR(userId);
+            return await _externalContactsProxy.GetUserBy(userId);
         }
 
-        public User RequestGDPRDelete(int userId)
+        public async Task<User> GetUserBy(string userEmail)
         {
-            return _externalContactsProxy.GDPRDelete(userId);
+            return await _externalContactsProxy.GetUserBy(userEmail);
         }
+
+        public async Task<User> RequestGDPR(int userId)
+        {
+            return await _externalContactsProxy.GDPR(userId);
+        }
+
+        //public User RequestGDPRDelete(int userId)
+        //{
+        //    return _externalContactsProxy.GDPRDelete(userId);
+        //}
     }
 }

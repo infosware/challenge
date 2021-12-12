@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SuperPanel.App.Helpers;
 using SuperPanel.App.Services.Abstract;
+using System.Threading.Tasks;
 
 namespace SuperPanel.App.Controllers
 {
@@ -22,10 +23,24 @@ namespace SuperPanel.App.Controllers
         }
 
         [Route("/users/get")]
-        public IActionResult GetUsers(int pageSize, int pageNumber)
+        public async Task<IActionResult> GetUsers(int pageSize, int pageNumber)
         {
-            var users = _userService.GetUsersBy(pageSize, pageNumber);
+            var users = await _userService.GetUsersBy(pageSize, pageNumber);
             return Json(users);
+        }
+
+        [Route("api/users/get/{userId:int}")]
+        public async Task<IActionResult> GetUserBy(int userId)
+        {
+            var user = await _userService.GetUserBy(userId);
+            return Json(user);
+        }
+
+        [Route("api/users/get/{userEmail}")]
+        public async Task<IActionResult> GetUserBy(string userEmail)
+        {
+            var user = await _userService.GetUserBy(userEmail);
+            return Json(user);
         }
 
         //[HttpPut]
