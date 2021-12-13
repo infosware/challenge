@@ -23,7 +23,7 @@ namespace SuperPanel.App.Helpers
         
         public static int ServiceRetryCount = Configuration.GetValue<int>("Constants:ServiceRetryCount");
         
-        public static int ServiceRetryTimeoutMs = Configuration.GetValue<int>("Constants:ServiceRetryTimeoutMs");
+        public static int ServiceRetryTimeoutSeconds = Configuration.GetValue<int>("Constants:ServiceRetryTimeoutSeconds");
 
         public static string[] PaginationOptions = Configuration.GetSection("Constants:PaginationOptions").Get<string[]>();
 
