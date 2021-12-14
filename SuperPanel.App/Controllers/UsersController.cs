@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SuperPanel.App.Helpers;
 using SuperPanel.App.Services.Abstract;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SuperPanel.App.Controllers
@@ -29,34 +31,26 @@ namespace SuperPanel.App.Controllers
             return Json(users);
         }
 
-        [Route("api/users/get/{userId:int}")]
-        public async Task<IActionResult> GetUserBy(int userId)
+        [HttpPut]
+        [Route("api/users/gdpr")]
+        public async Task<IActionResult> RequestUserGDPR(string userEmailsJson)
         {
-            var user = await _userService.GetUserBy(userId);
-            return Json(user);
+            var userEmails = JsonConvert.DeserializeObject<List<string>>(userEmailsJson);
+            
+            var gdprResult = await _userService.RequestGDPR(userEmails);
+
+            return Json(gdprResult.NotFoundUserEmails);
         }
 
-        [Route("api/users/get/{userEmail}")]
-        public async Task<IActionResult> GetUserBy(string userEmail)
+        [HttpPut]
+        [Route("api/users/gdpr/delete")]
+        public async Task<IActionResult> RequestUserGDPRDelete(string userEmailsJson)
         {
-            var user = await _userService.GetUserBy(userEmail);
-            return Json(user);
+            var userEmails = JsonConvert.DeserializeObject<List<string>>(userEmailsJson);
+
+            var gdprResult = await _userService.RequestGDPRDelete(userEmails);
+
+            return Json(gdprResult.NotFoundUserEmails);
         }
-
-        //[HttpPut]
-        //[Route("/users/gdpr/{userId:int}")]
-        //public IActionResult RequestUserGDPR(int userId)
-        //{
-        //    var user = _userService.RequestGDPR(userId);
-        //    return Json(user);
-        //}
-
-        //[HttpPut]
-        //[Route("/users/gdpr/{userId:int}/delete")]
-        //public IActionResult RequestUserGDPRDelete(int userId)
-        //{
-        //    var user = _userService.RequestGDPRDelete(userId);
-        //    return Json(user);
-        //}
     }
 }

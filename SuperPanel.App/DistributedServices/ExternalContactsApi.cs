@@ -7,6 +7,7 @@ using SuperPanel.App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -51,6 +52,11 @@ namespace SuperPanel.App.DistributedServices
             {
                 var result = await client.GetAsync($"v1/contacts/{userEmail}");
 
+                if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+
                 if (!result.IsSuccessStatusCode)
                 {
                     throw new HttpRequestException(result.ReasonPhrase);
@@ -83,7 +89,17 @@ namespace SuperPanel.App.DistributedServices
 
         public async Task<User> GDPRDelete(int userId)
         {
-            throw new NotImplementedException();
+            // Request API for GDPR deletion
+            var fakeDeanonymizedUser = new User
+            {
+                Id = userId,
+                FirstName = "FIRST",
+                LastName = "LAST",
+                Email = "DEANONYMIZED_FROM_API@example.com",
+                IsAnonymized = false
+            };
+
+            return await Task.FromResult(fakeDeanonymizedUser);
         }
     }
 }

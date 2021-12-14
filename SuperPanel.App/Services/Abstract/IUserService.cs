@@ -10,14 +10,14 @@ namespace SuperPanel.App.Services.Abstract
     {
         Task<IEnumerable<User>> GetAllUsers();
         
-        Task<UsersData>  GetUsersBy(int pageSize, int pageNumber);
+        Task<UsersViewModel>  GetUsersBy(int pageSize, int pageNumber);
 
         Task<User> GetUserBy(int userId);
         
         Task<User> GetUserBy(string userEmail);
 
-        //User RequestGDPR(int userId);
-
-        //User RequestGDPRDelete(int userId);
+        Task<GDPRResultViewModel> RequestGDPR(List<string> userEmails);
+        
+        Task<GDPRResultViewModel> RequestGDPRDelete(List<string> userEmails);
     }
 }

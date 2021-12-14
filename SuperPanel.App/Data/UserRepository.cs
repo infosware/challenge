@@ -14,6 +14,8 @@ namespace SuperPanel.App.Data
         IEnumerable<User> Query(int pageSize, int pageNumber);
 
         int Count();
+
+        void UpdateGdpr(Dictionary<string, User> users);
     }
 
     public class UserRepository : IUserRepository
@@ -44,6 +46,22 @@ namespace SuperPanel.App.Data
                 .OrderBy(u => u.Id)
                 .Skip(pageNumber * pageSize - pageSize)
                 .Take(pageSize);
+        }
+
+        public void UpdateGdpr(Dictionary<string, User> users)
+        {
+            foreach (KeyValuePair<string, User> user in users)
+            {
+                var dbUser = _users.SingleOrDefault(u => u.Email == user.Key);
+
+                if (dbUser != null)
+                { 
+                    dbUser.Email = user.Value.Email;
+                    dbUser.FirstName = user.Value.FirstName;
+                    dbUser.LastName = user.Value.LastName;
+                    dbUser.IsAnonymized = user.Value.IsAnonymized;
+                }
+            }
         }
     }
 }

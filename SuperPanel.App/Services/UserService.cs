@@ -4,6 +4,7 @@ using SuperPanel.App.DistributedServices.Abstract;
 using SuperPanel.App.Helpers;
 using SuperPanel.App.Models;
 using SuperPanel.App.Services.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,9 +26,9 @@ namespace SuperPanel.App.Services
             return await Task.FromResult(_userRepository.QueryAll());
         }
 
-        public async Task<UsersData> GetUsersBy(int pageSize, int pageNumber)
+        public async Task<UsersViewModel> GetUsersBy(int pageSize, int pageNumber)
         {
-            return await Task.FromResult(new UsersData { 
+            return await Task.FromResult(new UsersViewModel { 
                 Users = _userRepository.Query(pageSize, pageNumber),
                 TotalCount = _userRepository.Count()
             });
@@ -43,14 +44,50 @@ namespace SuperPanel.App.Services
             return await _externalContactsProxy.GetUserBy(userEmail);
         }
 
-        public async Task<User> RequestGDPR(int userId)
+        public async Task<GDPRResultViewModel> RequestGDPR(List<string> userEmails)
         {
-            return await _externalContactsProxy.GDPR(userId);
+            var result = new GDPRResultViewModel();
+
+            foreach (var email in userEmails)
+            {
+                var user = await _externalContactsProxy.GetUserBy(email);
+                if (user == null)
+                {
+                    result.NotFoundUserEmails.Add(email);
+                }
+                else
+                { 
+                    var anonymizedUser = await _externalContactsProxy.GDPR(user.Id);
+                    result.UpdatedUsers.Add(email, anonymizedUser);
+                }                
+            }
+
+            _userRepository.UpdateGdpr(result.UpdatedUsers);
+
+            return await Task.FromResult(result);
         }
 
-        //public User RequestGDPRDelete(int userId)
-        //{
-        //    return _externalContactsProxy.GDPRDelete(userId);
-        //}
+        public async Task<GDPRResultViewModel> RequestGDPRDelete(List<string> userEmails)
+        {
+            var result = new GDPRResultViewModel();
+
+            foreach (var email in userEmails)
+            {
+                var user = await _externalContactsProxy.GetUserBy(email);
+                if (user == null)
+                {
+                    result.NotFoundUserEmails.Add(email);
+                }
+                else
+                {
+                    var anonymizedUser = await _externalContactsProxy.GDPRDelete(user.Id);
+                    result.UpdatedUsers.Add(email, anonymizedUser);
+                }
+            }
+
+            _userRepository.UpdateGdpr(result.UpdatedUsers);
+
+            return await Task.FromResult(result);
+        }
     }
 }

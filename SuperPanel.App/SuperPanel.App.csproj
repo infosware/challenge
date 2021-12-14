@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\lib\dayjs\" />
+    <Folder Include="wwwroot\lib\toastr\" />
   </ItemGroup>
 
 </Project>

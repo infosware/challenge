@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace SuperPanel.App.Models
 {
-    public class UsersData
+    public class UsersViewModel
     {
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; } = new List<User>();
         public int TotalCount { get; set; }
     }
 }

@@ -156,7 +156,38 @@ body {
     font-weight: normal;
 }
 
+.entity-th.w-4 {
+    width: 4%;
+}
+
+.entity-th.w-8 {
+    width: 8%;
+}
+
+.entity-th.w-20 {
+    width: 20%;
+}
+
 .entity-data-tbody td {
     border: 1px solid #ddd;
     padding: 8px 5px 8px 10px;
+}
+
+.entity-data-thead th.user-checkbox-all-cell, .entity-data-tbody td.user-checkbox-cell {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Table toolbar styles -> move to a separate file later
+-------------------------------------------------- */
+.table-control-wrap {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-control-wrap .btn-anonymize {
+    margin-right: 15px;
 }
