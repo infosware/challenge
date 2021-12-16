@@ -2,7 +2,7 @@
 using Polly;
 using Polly.Retry;
 using SuperPanel.App.DistributedServices.Abstract;
-using SuperPanel.App.Helpers;
+using SuperPanel.App.Infrastructure;
 using SuperPanel.App.Models;
 using System;
 using System.Collections.Generic;

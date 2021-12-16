@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace SuperPanel.App.Helpers
+namespace SuperPanel.App.Infrastructure
 {
     public class AppSettings
     {
