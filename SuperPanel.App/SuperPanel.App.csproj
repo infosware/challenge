@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="wwwroot\lib\dayjs\" />
     <Folder Include="wwwroot\lib\toastr\" />
   </ItemGroup>
