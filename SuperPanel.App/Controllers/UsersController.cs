@@ -41,16 +41,5 @@ namespace SuperPanel.App.Controllers
 
             return Json(gdprResult.NotFoundUserEmails);
         }
-
-        [HttpPut]
-        [Route("api/users/gdpr/delete")]
-        public async Task<IActionResult> RequestUserGDPRDelete(string userEmailsJson)
-        {
-            var userEmails = JsonConvert.DeserializeObject<List<string>>(userEmailsJson);
-
-            var gdprResult = await _userService.RequestGDPRDelete(userEmails);
-
-            return Json(gdprResult.NotFoundUserEmails);
-        }
     }
 }

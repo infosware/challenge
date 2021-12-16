@@ -60,6 +60,9 @@ namespace SuperPanel.App.Data
                     dbUser.FirstName = user.Value.FirstName;
                     dbUser.LastName = user.Value.LastName;
                     dbUser.IsAnonymized = user.Value.IsAnonymized;
+                    dbUser.Login = user.Value.Login;
+                    dbUser.Phone = user.Value.Phone;
+                    dbUser.CreatedAt = user.Value.CreatedAt;
                 }
             }
         }

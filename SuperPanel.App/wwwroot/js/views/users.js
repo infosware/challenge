@@ -1,5 +1,5 @@
 ﻿import { PanelHogan } from '../panelHogan.js';
-import { getUsers, requestGdpr, requestGdprDelete } from '../services/userService.js';
+import { getUsers, requestGdpr } from '../services/userService.js';
 import { showLoadingOverlay, hideLoadingOverlay } from '../helpers.js';
 import { Pagination } from './pagination.js';
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '../constants.js';
@@ -21,7 +21,6 @@ class Users {
             userCheckboxCell: '.user-checkbox-cell',
             userCheckbox: '.user-checkbox',
             btnAnonymize: '.btn-anonymize',
-            btnDeanonymize: '.btn-deanonymize',
             usersTable: '.users_table',
             usersTableBody: '.entity-data-tbody',
         }
@@ -49,10 +48,7 @@ class Users {
             this.toggleUserCheckbox(target);
         }
         else if (target.is($(this.selectors.btnAnonymize))) {
-            this.onGdprRequest(true);
-        }
-        else if (target.is($(this.selectors.btnDeanonymize))) {
-            this.onGdprRequest(false);
+            this.onGdprRequest();
         }
 
         this.toggleAnonButtons();
@@ -80,22 +76,19 @@ class Users {
         const isAnyUserChecked = $(this.selectors.usersTable).find('input:checked').length;
 
         $(this.selectors.btnAnonymize).prop('disabled', !isAnyUserChecked);
-        $(this.selectors.btnDeanonymize).prop('disabled', !isAnyUserChecked);
     }
 
-    onGdprRequest(anonymize) {
+    onGdprRequest() {
         const self = this;
         const emails = [];
         $(this.selectors.usersTableBody).find('input:checked').each((index, cb) => emails.push($(cb).val()));
 
         showLoadingOverlay($(self.selectors.usersWrapper));
 
-        const gdprRequestFn = anonymize ? requestGdpr : requestGdprDelete;
-
-        gdprRequestFn(emails).then((data) => {
+        requestGdpr(emails).then((data) => {
 
             if (data && data.length) {
-                toastr.error(data.join(`\n`), 'The following users are not found for updates:')
+                toastr.error(data.join(`\n`), 'The following users are not found for GDPR:')
             }
             self.loadUsers(self.pageSize, self.pageNumber, self);
         })

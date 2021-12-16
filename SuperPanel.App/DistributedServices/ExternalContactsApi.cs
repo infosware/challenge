@@ -86,20 +86,5 @@ namespace SuperPanel.App.DistributedServices
                 return JsonConvert.DeserializeObject<User>(resultString);
             });
         }
-
-        public async Task<User> GDPRDelete(int userId)
-        {
-            // Request API for GDPR deletion
-            var fakeDeanonymizedUser = new User
-            {
-                Id = userId,
-                FirstName = "FIRST",
-                LastName = "LAST",
-                Email = "DEANONYMIZED_FROM_API@example.com",
-                IsAnonymized = false
-            };
-
-            return await Task.FromResult(fakeDeanonymizedUser);
-        }
     }
 }

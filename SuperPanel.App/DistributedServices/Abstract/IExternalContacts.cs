@@ -13,7 +13,5 @@ namespace SuperPanel.App.DistributedServices.Abstract
         Task<User> GetUserBy(string userEmail);
 
         Task<User> GDPR(int userId);
-
-        Task<User> GDPRDelete(int userId);
     }
 }

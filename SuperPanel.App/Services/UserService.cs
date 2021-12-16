@@ -66,28 +66,5 @@ namespace SuperPanel.App.Services
 
             return await Task.FromResult(result);
         }
-
-        public async Task<GDPRResultViewModel> RequestGDPRDelete(List<string> userEmails)
-        {
-            var result = new GDPRResultViewModel();
-
-            foreach (var email in userEmails)
-            {
-                var user = await _externalContactsProxy.GetUserBy(email);
-                if (user == null)
-                {
-                    result.NotFoundUserEmails.Add(email);
-                }
-                else
-                {
-                    var anonymizedUser = await _externalContactsProxy.GDPRDelete(user.Id);
-                    result.UpdatedUsers.Add(email, anonymizedUser);
-                }
-            }
-
-            _userRepository.UpdateGdpr(result.UpdatedUsers);
-
-            return await Task.FromResult(result);
-        }
     }
 }

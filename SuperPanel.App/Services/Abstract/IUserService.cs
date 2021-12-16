@@ -17,7 +17,5 @@ namespace SuperPanel.App.Services.Abstract
         Task<User> GetUserBy(string userEmail);
 
         Task<GDPRResultViewModel> RequestGDPR(List<string> userEmails);
-        
-        Task<GDPRResultViewModel> RequestGDPRDelete(List<string> userEmails);
     }
 }
