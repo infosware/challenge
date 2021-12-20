@@ -3,11 +3,10 @@ using SuperPanel.App.Data;
 using SuperPanel.App.DistributedServices.Abstract;
 using SuperPanel.App.Models;
 using SuperPanel.App.Services;
-using SuperPanel.App.Services.Abstract;
+using SuperPanel.App.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
