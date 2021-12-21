@@ -1,6 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -68,4 +76,118 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* Pagination styles -> move to a separate file later
+-------------------------------------------------- */
+.paginator {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginator-select {
+    margin: 0 5px;
+}
+
+.paginator .active {
+    background: rgb(246, 246, 246);
+}
+
+.paginator-options {
+    display: flex;
+}
+
+.paginator-options span {
+    line-height: 2;
+    margin-left: 5px;
+}
+
+.paginator-list {
+    display: flex;
+}
+
+.paginator-list li {
+    padding: 4px 0;
+}
+
+.paginator-list li .link {
+    position: relative;
+    padding: 6px 12px;
+    line-height: 1.428571429;
+    margin-left: -1px;
+    color: rgb(141, 148, 152);
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.paginator-list li:hover {
+    background: rgb(246, 246, 246);
+}
+
+.paginator-list li:hover .link {
+    color: rgb(85, 85, 85);
+}
+
+.link.go-to-page, .link.rows-per-page {
+    cursor: pointer;
+}
+
+/* Table styles -> move to a separate file later
+-------------------------------------------------- */
+.entity-data-table {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.entity-data-thead {
+    border-bottom: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+.entity-th {
+    text-align: left;
+    background: rgb(246, 246, 246);
+    border: 1px solid #ddd;
+    padding: 16px 8px;
+    font-weight: normal;
+}
+
+.entity-th.w-4 {
+    width: 4%;
+}
+
+.entity-th.w-8 {
+    width: 8%;
+}
+
+.entity-th.w-20 {
+    width: 20%;
+}
+
+.entity-data-tbody td {
+    border: 1px solid #ddd;
+    padding: 8px 5px 8px 10px;
+}
+
+.entity-data-thead th.user-checkbox-all-cell, .entity-data-tbody td.user-checkbox-cell {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Table toolbar styles -> move to a separate file later
+-------------------------------------------------- */
+.table-control-wrap {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-control-wrap .btn-anonymize {
+    margin-right: 15px;
 }

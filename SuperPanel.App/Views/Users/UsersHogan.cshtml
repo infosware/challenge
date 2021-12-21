@@ -1,0 +1,35 @@
+﻿<script type="text/x-hogan-template" id="users-hogan-template">
+    {{#object}}
+        <div class="entity-data-table-toolbar">
+          <div class="table-control-wrap">
+              <button type="button" class="btn btn-outline-secondary btn-sm btn-anonymize" disabled>Anonymize</button>
+          </div>
+        </div>
+        <table class="table entity-data-table users_table ">
+        <thead class="entity-data-thead">
+            <tr>
+                <th class="entity-th w-4 user-checkbox-all-cell">
+                    <input type="checkbox" class="user-checkbox-all" />
+                </th>
+                <th class="entity-th w-8">#</th>
+                <th class="entity-th">Name</th>
+                <th class="entity-th">Email</th>
+                <th class="entity-th w-20">Created at</th>
+            </tr>
+        </thead>
+        <tbody class="entity-data-tbody">
+        {{#users}}
+            <tr>
+                <td class="user-checkbox-cell">
+                    <input type="checkbox" name="{{email}}" value="{{email}}" class="user-checkbox" />
+                </td>
+                <td>{{id}}</td>
+                <td>{{firstName}} {{lastName}}</td>
+                <td>{{email}}</td>
+                <td>{{createdAt}}</td>
+            </tr>
+        {{/users}}
+        </tbody>
+        </table>
+    {{/object}}
+</script>

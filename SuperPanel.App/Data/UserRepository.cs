@@ -10,6 +10,12 @@ namespace SuperPanel.App.Data
     public interface IUserRepository
     {
         IEnumerable<User> QueryAll();
+        
+        IEnumerable<User> Query(int pageSize, int pageNumber);
+
+        int Count();
+
+        void UpdateGdpr(Dictionary<string, User> users);
     }
 
     public class UserRepository : IUserRepository
@@ -29,5 +35,36 @@ namespace SuperPanel.App.Data
             return _users;
         }
 
+        public int Count()
+        {
+            return _users.Count;
+        }
+
+        public IEnumerable<User> Query(int pageSize, int pageNumber)
+        {
+            return _users
+                .OrderBy(u => u.Id)
+                .Skip(pageNumber * pageSize - pageSize)
+                .Take(pageSize);
+        }
+
+        public void UpdateGdpr(Dictionary<string, User> users)
+        {
+            foreach (KeyValuePair<string, User> user in users)
+            {
+                var dbUser = _users.SingleOrDefault(u => u.Email == user.Key);
+
+                if (dbUser != null)
+                { 
+                    dbUser.Email = user.Value.Email;
+                    dbUser.FirstName = user.Value.FirstName;
+                    dbUser.LastName = user.Value.LastName;
+                    dbUser.IsAnonymized = user.Value.IsAnonymized;
+                    dbUser.Login = user.Value.Login;
+                    dbUser.Phone = user.Value.Phone;
+                    dbUser.CreatedAt = user.Value.CreatedAt;
+                }
+            }
+        }
     }
 }

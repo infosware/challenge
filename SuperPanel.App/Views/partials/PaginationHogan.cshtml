@@ -1,0 +1,51 @@
+﻿<script type="text/x-hogan-template" id="pagination-hogan-template">
+    {{#object}}
+        <ul class="paginator-list">
+            <li>
+                <span class="link go-to-page paginator-page-first">‹‹</span>
+            </li>
+            <li>
+                <span class="link go-to-page paginator-page-pre">‹</span>
+            </li>
+            {{#few_pages}}
+                <li>
+                    <span class="link go-to-page paginator-page-number {{pageClass}}">{{pageNum}}</span>
+                </li>
+            {{/few_pages}}
+            {{#many_pages_edge}}
+                {{#start}}
+                    <li>
+                        <span class="link go-to-page paginator-page-number {{pageClass}}">{{pageNum}}</span>
+                    </li>
+                {{/start}}
+                <li>
+                    <span class="link go-to-page paginator-page-number many_pages_edges_middle">...</span>
+                </li>
+                {{#end}}
+                    <li>
+                        <span class="link go-to-page paginator-page-number {{pageClass}}">{{pageNum}}</span>
+                    </li>
+                {{/end}}
+            {{/many_pages_edge}}
+            {{#many_pages_middle}}
+                <li>
+                    <span class="link go-to-page paginator-page-number many_pages_middle_start">...</span>
+                </li>
+                {{#middle}}
+                <li>
+                    <span class="link go-to-page paginator-page-number {{pageClass}}">{{pageNum}}</span>
+                </li>
+                {{/middle}}
+                <li>
+                    <span class="link go-to-page paginator-page-number many_pages_middle_end">...</span>
+                </li>
+            {{/many_pages_middle}}
+            <li>
+                <span class="link go-to-page paginator-page-next">›</span>
+            </li>
+            <li>
+                <span class="link go-to-page paginator-page-last">››</span>
+            </li>
+        </ul>
+    {{/object}}
+</script>

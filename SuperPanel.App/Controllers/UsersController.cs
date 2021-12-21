@@ -1,26 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SuperPanel.App.Data;
+using Newtonsoft.Json;
+using SuperPanel.App.Services.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SuperPanel.App.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ILogger<UsersController> _logger;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UsersController(ILogger<UsersController> logger, IUserRepository userRepository)
+        public UsersController(ILogger<UsersController> logger, IUserService userService)
         {
             _logger = logger;
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
-            var users = _userRepository.QueryAll();
-            return View(users);
+            return View();
         }
 
+        [Route("/users/get")]
+        public async Task<IActionResult> GetUsers(int pageSize, int pageNumber)
+        {
+            var users = await _userService.GetUsersBy(pageSize, pageNumber);
+            return Json(users);
+        }
 
+        [HttpPut]
+        [Route("api/users/gdpr")]
+        public async Task<IActionResult> RequestUserGDPR(string userEmailsJson)
+        {
+            var userEmails = JsonConvert.DeserializeObject<List<string>>(userEmailsJson);
+            
+            var gdprResult = await _userService.RequestGDPR(userEmails);
+
+            return Json(gdprResult.NotFoundUserEmails);
+        }
     }
 }

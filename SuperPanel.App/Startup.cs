@@ -5,8 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperPanel.App.Data;
+using SuperPanel.App.DistributedServices;
+using SuperPanel.App.DistributedServices.Abstract;
 using SuperPanel.App.Infrastructure;
 using SuperPanel.App.Models;
+using SuperPanel.App.Services;
+using SuperPanel.App.Services.Abstract;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -32,8 +36,16 @@ namespace SuperPanel.App
             services.AddOptions();
             services.Configure<DataOptions>(options => Configuration.GetSection("Data").Bind(options));
 
+            // HttpClient
+            services.AddHttpClient(AppSettings.ExternalContactsHttpClient, client => 
+            {
+                client.BaseAddress = new Uri(AppSettings.ExternalContactsApiUrl);
+            });
+
             // Data
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExternalContacts, ExternalContactsApi>();
         }
 
 
